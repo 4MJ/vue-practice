@@ -1,17 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <h1>{{ title }}</h1>
+    <input type="text" v-model="title" />
+    <!--p>{{ text }}</p-->
+    <hr />
+    <div>
+      <app-HelloWorld
+        v-on:changeTitle="title = $event"
+        v-bind:newTitle="title"
+        :newText="text"
+      ></app-HelloWorld>
+      <hr />
+      <app-firstChild
+        v-on:sendText="text = $event"
+        v-bind:newText="text"
+      ></app-firstChild>
+    </div>
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
+import firstChild from "./components/firstchild.vue";
 
 export default {
-  name: "App",
+  data() {
+    return {
+      title: "Our Title From Parent",
+      text: "I am coming from App Vue"
+    };
+  },
+  name: "app",
   components: {
-    HelloWorld
+    "app-HelloWorld": HelloWorld,
+    "app-firstChild": firstChild
   }
 };
 </script>
