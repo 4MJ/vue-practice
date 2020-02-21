@@ -8,19 +8,22 @@
 </template>
 
 <script>
+import { eventBus } from "../main.js";
 export default {
   props: ["newTitle", "newText"],
   name: "hello",
   data() {
     return {
       // eslint-disable-next-line vue/no-dupe-keys
-      msg: "Welcome From Hello World"
+      msg: "Welcome From Hello World",
+      anyName: "eventBus for Hello"
     };
   },
   methods: {
     changeTitle() {
       this.newTitle = "Title was Change by Hello World Child";
       this.$emit("changeTitle", this.newTitle);
+      eventBus.$emit("send-name", this.anyName);
     }
   }
 };

@@ -1,3 +1,4 @@
+/* eslint-disable vue/no-parsing-error */
 <template>
   <div id="app">
     <h1>{{ title }}</h1>
@@ -16,24 +17,37 @@
         v-bind:newText="text"
       ></app-firstChild>
     </div>
+    <hr />
+    <button @click="currentComponent = 'one'">Blue Template</button>
+    <button @click="currentComponent = 'two'">Teal Template</button>
+    <keep-alive>
+      <component :is="currentComponent"></component>
+    </keep-alive>
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 import firstChild from "./components/firstchild.vue";
+import one from "./components/one.vue";
+import two from "./components/two.vue";
 
 export default {
   data() {
     return {
       title: "Our Title From Parent",
-      text: "I am coming from App Vue"
+      text: "I am coming from App Vue",
+      currentComponent: "one"
     };
   },
   name: "app",
   components: {
     "app-HelloWorld": HelloWorld,
-    "app-firstChild": firstChild
+    "app-firstChild": firstChild,
+    // eslint-disable-next-line vue/no-unused-components
+    one,
+    // eslint-disable-next-line vue/no-unused-components
+    two
   }
 };
 </script>
